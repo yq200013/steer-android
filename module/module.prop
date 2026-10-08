@@ -1,0 +1,6 @@
+id=steer
+name=Steer (分应用 eBPF 透明代理)
+version=v0.3.8
+versionCode=24
+author=workspace
+description=让选中的应用无感走本地 SOCKS5：cgroup eBPF(connect/getpeername/sock_ops) 把目标改写成 127.0.0.1 后交给用户态中继。不占 VpnService、不写 iptables/ip rule。带 WebUI 面板。

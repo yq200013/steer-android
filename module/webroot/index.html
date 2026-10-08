@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Steer · 分应用透明代理</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hd">
+  <div class="hd-l">
+    <div class="title">Steer</div>
+    <div class="sub" id="sub">分应用透明代理</div>
+  </div>
+  <div class="hd-r">
+    <span class="badge" id="runBadge">—</span>
+    <button class="icon" id="btnRefresh" title="刷新">⟳</button>
+  </div>
+</header>
+
+<main>
+  <section class="card master" id="masterCard">
+    <div class="mrow">
+      <div class="mtxt">
+        <div class="mtitle">代理总开关</div>
+        <div class="msub" id="masterSub">—</div>
+      </div>
+      <button class="switch" id="masterSw" role="switch" aria-checked="false"><span></span></button>
+    </div>
+    <div class="mrow2">
+      <button class="ghost" id="btnStart">启动 / 重启服务</button>
+      <button class="ghost" id="btnDiag">诊断</button>
+    </div>
+  </section>
+
+  <section class="card" id="statusCard">
+    <div class="row"><span class="k">出口 SOCKS5</span><span class="v" id="stSocks">—</span></div>
+    <div class="row"><span class="k">本地中继</span><span class="v" id="stRelay">—</span></div>
+    <div class="row"><span class="k">默认策略</span><span class="v" id="stDefault">—</span></div>
+    <div class="row stats">
+      <span><b id="stProxy">0</b><i>代理连接</i></span>
+      <span><b id="stDirect">0</b><i>直连</i></span>
+      <span><b id="stBlock">0</b><i>拦截</i></span>
+      <span><b id="stFail">0</b><i>失败</i></span>
+    </div>
+  </section>
+
+  <section class="card" id="policyCard">
+    <div class="lbl">默认策略（未单独设置的应用）</div>
+    <div class="seg" id="segDefault">
+      <button data-m="0">直连</button>
+      <button data-m="1">走代理</button>
+      <button data-m="2">拦截</button>
+    </div>
+    <div class="hint" id="defHint">「走代理」= 全部应用；下面单独设置的应用优先生效。</div>
+  </section>
+
+  <section class="card" id="appsCard">
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="搜索应用名 / 包名">
+      <label class="chk"><input type="checkbox" id="sys"> 系统应用</label>
+    </div>
+    <div class="chips">
+      <span class="chip" id="cntSet">已设置 0</span>
+      <span class="chip" id="cntProxy">代理 0</span>
+      <span class="chip" id="cntDirect">直连 0</span>
+      <span class="chip" id="cntBlock">拦截 0</span>
+    </div>
+    <ul class="list" id="list"></ul>
+    <div class="empty" id="empty">加载中…</div>
+  </section>
+
+  <section class="card" id="cfgCard">
+    <div class="cfghead" id="cfgToggle">
+      <span>⚙ 设置</span>
+      <span class="chev" id="cfgChev">▾</span>
+    </div>
+    <div class="cfgbody" id="cfgBody" hidden>
+      <label class="f"><span>SOCKS5 主机</span><input id="cHost" type="text" inputmode="decimal" placeholder="127.0.0.1"></label>
+      <label class="f"><span>SOCKS5 端口</span><input id="cPort" type="number" min="1" max="65535"></label>
+      <label class="f"><span>用户名（可选）</span><input id="cUser" type="text" placeholder="留空不修改"></label>
+      <label class="f"><span>密码（可选）</span><input id="cPass" type="password" placeholder="留空不修改"></label>
+      <label class="f"><span>本地中继端口</span><input id="cRelay" type="number" min="1024" max="65535"></label>
+      <label class="f chkline"><span>私网/内网地址不代理</span><input id="cFlags" type="checkbox"></label>
+      <label class="f chkline"><span>UDP（QUIC 等）也走代理</span><input id="cUdp" type="checkbox"></label>
+      <label class="f"><span>UDP 中继端口</span><input id="cRelayUdp" type="number" min="1024" max="65535"></label>
+      <button class="primary" id="cfgSave">保存并重启</button>
+      <div class="hint">主机仅支持 IPv4 字面量（不支持域名）。改完端口/账号需重启守护才生效。</div>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <span id="ftInfo">—</span>
+</footer>
+
+<div class="modal" id="diagModal" hidden>
+  <div class="mbox">
+    <div class="mhead">
+      <span>诊断输出</span>
+      <button class="icon" id="diagClose">✕</button>
+    </div>
+    <pre id="diagOut">读取中…</pre>
+  </div>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

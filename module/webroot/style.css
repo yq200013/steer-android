@@ -1,0 +1,124 @@
+:root{
+  --bg:#0f1317; --card:#171c22; --card2:#1d242c; --line:#28313a;
+  --fg:#e8edf2; --dim:#8b98a5; --accent:#4c8dff;
+  --proxy:#3ba55d; --direct:#5b6b7c; --block:#e0574b;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+/* 必须放在所有规则最前面且带 !important：
+ * 我们自己给 .modal / .cfgbody 等写了 display:flex，
+ * 会盖掉 UA 样式表里的 [hidden]{display:none}，导致这些元素永远显示。 */
+[hidden]{display:none !important}
+html,body{margin:0;background:var(--bg);color:var(--fg);
+  font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{padding-bottom:64px}
+
+.hd{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px 12px;background:linear-gradient(180deg,#0f1317 70%,rgba(15,19,23,0));}
+.hd .title{font-size:20px;font-weight:650;letter-spacing:.3px}
+.hd .sub{font-size:12px;color:var(--dim);margin-top:2px}
+.hd-r{display:flex;align-items:center;gap:8px}
+.badge{font-size:12px;padding:4px 9px;border-radius:999px;background:#2a3140;color:var(--dim)}
+.badge.on{background:rgba(59,165,93,.18);color:#7ee2a2}
+.badge.off{background:rgba(224,87,75,.16);color:#ff9b91}
+.icon{background:var(--card2);border:1px solid var(--line);color:var(--fg);
+  border-radius:10px;width:34px;height:34px;font-size:17px;line-height:1}
+
+main{padding:0 12px;display:flex;flex-direction:column;gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 13px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:14px}
+.row .k{color:var(--dim)}
+.row .v{font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px;
+  border-top:1px solid var(--line);padding-top:10px}
+.stats span{display:flex;flex-direction:column;align-items:center;gap:2px}
+.stats b{font-size:16px;font-variant-numeric:tabular-nums}
+.stats i{font-style:normal;font-size:11px;color:var(--dim)}
+
+/* 总开关 */
+.master{padding:14px 13px}
+.mrow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mtitle{font-size:15.5px;font-weight:600}
+.msub{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.4}
+.switch{position:relative;flex:none;width:54px;height:32px;border-radius:999px;
+  background:#39434f;border:0;padding:0;transition:background .18s}
+.switch span{position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;
+  background:#fff;transition:transform .18s;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.switch.on{background:var(--proxy)}
+.switch.on span{transform:translateX(22px)}
+.switch:disabled{opacity:.5}
+
+/* 有命令在飞时短暂冻结交互 */
+body.busy .seg button{pointer-events:none}
+body.busy .list{opacity:.6}
+
+/* 关闭时把下面几块置灰 */
+body.steer-off #policyCard,
+body.steer-off #appsCard{opacity:.42;pointer-events:none;filter:saturate(.5)}
+
+.lbl{font-size:12.5px;color:var(--dim);margin-bottom:8px}
+.seg{display:flex;background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:3px;gap:3px}
+.seg button{flex:1;background:transparent;border:0;color:var(--dim);font-size:13.5px;
+  padding:8px 0;border-radius:8px;font-family:inherit}
+.seg button.on{background:#2c3745;color:var(--fg);font-weight:600}
+.seg button.on[data-m="1"]{background:rgba(59,165,93,.22);color:#8ce8ad}
+.seg button.on[data-m="2"]{background:rgba(224,87,75,.2);color:#ffa39a}
+.hint{font-size:11.5px;color:var(--dim);margin-top:8px;line-height:1.5}
+
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:9px}
+#q{flex:1;background:var(--card2);border:1px solid var(--line);color:var(--fg);
+  border-radius:10px;padding:9px 11px;font-size:14px;font-family:inherit;min-width:0}
+#q::placeholder{color:#5f6b78}
+.chk{display:flex;align-items:center;gap:5px;font-size:12.5px;color:var(--dim);white-space:nowrap}
+
+.chips{display:flex;gap:6px;margin-bottom:9px;flex-wrap:wrap}
+.chip{font-size:11.5px;color:var(--dim);background:var(--card2);border:1px solid var(--line);
+  padding:3px 8px;border-radius:999px}
+
+.list{list-style:none;margin:0;padding:0}
+.li{display:flex;align-items:center;gap:10px;padding:9px 2px;border-top:1px solid var(--line)}
+.li:first-child{border-top:0}
+.li img{width:32px;height:32px;border-radius:9px;background:#222a33;flex:none}
+.li .meta{min-width:0;flex:1}
+.li .nm{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li .pk{font-size:11px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li .seg{flex:none;width:212px;padding:2px}
+.li .seg button{font-size:11.5px;padding:6px 0;letter-spacing:-.2px}
+
+.empty{text-align:center;color:var(--dim);font-size:13px;padding:18px 0}
+
+.mrow2{display:flex;gap:8px;margin-top:11px}
+.ghost{flex:1;background:var(--card2);border:1px solid var(--line);color:var(--fg);
+  border-radius:10px;padding:9px 0;font-size:13px;font-family:inherit}
+.ghost:active{background:#28313a}
+.ghost:disabled{opacity:.5}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:20;
+  display:flex;align-items:center;justify-content:center;padding:14px}
+.mbox{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  width:100%;max-width:640px;max-height:82vh;display:flex;flex-direction:column}
+.mhead{display:flex;align-items:center;justify-content:space-between;
+  padding:11px 13px;border-bottom:1px solid var(--line);font-size:14.5px;font-weight:600}
+.mbox pre{margin:0;padding:12px 13px;overflow:auto;font-size:11.5px;line-height:1.45;
+  white-space:pre-wrap;word-break:break-all;color:var(--dim);font-family:ui-monospace,monospace}
+
+/* 设置 */
+.cfghead{display:flex;align-items:center;justify-content:space-between;
+  font-size:14.5px;font-weight:600;cursor:pointer;user-select:none}
+.chev{color:var(--dim);transition:transform .18s;font-size:12px}
+.chev.open{transform:rotate(180deg)}
+.cfgbody{margin-top:12px;display:flex;flex-direction:column;gap:9px}
+.f{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px;color:var(--dim)}
+.f>span{flex:none}
+.f input[type=text],.f input[type=number],.f input[type=password]{
+  flex:1;min-width:0;background:var(--card2);border:1px solid var(--line);color:var(--fg);
+  border-radius:9px;padding:8px 10px;font-size:14px;font-family:inherit;text-align:right}
+.f input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent)}
+.chkline{flex-direction:row-reverse}
+.primary{margin-top:4px;background:var(--accent);color:#fff;border:0;border-radius:10px;
+  padding:11px 0;font-size:14.5px;font-weight:600;font-family:inherit}
+.primary:disabled{opacity:.5}
+.ft{position:fixed;left:0;right:0;bottom:0;padding:10px 16px;
+  background:rgba(15,19,23,.92);border-top:1px solid var(--line);
+  font-size:11.5px;color:var(--dim);text-align:center;
+  padding-bottom:calc(10px + env(safe-area-inset-bottom))}

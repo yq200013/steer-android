@@ -1,0 +1,18 @@
+GNU GENERAL PUBLIC LICENSE
+Version 2, June 1991
+
+Copyright (C) 1989, 1991 Free Software Foundation, Inc.
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
+
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+
+[本文件为 GPL-2.0 的占位声明。]
+本项目的 eBPF 程序必须以 GPL 兼容许可发布（程序内声明为
+SEC("license") = "GPL"），因此整个项目采用 GPL-2.0-only。
+
+完整的 GPL-2.0 文本请见:
+  https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
+本项目不提供任何担保。在 Android 上以 root 运行并修改网络行为有风险，
+使用者需自行承担后果。
