@@ -4,6 +4,9 @@
 **不占 VpnService、不写 iptables、不写 ip rule。** 带 KernelSU WebUI 面板。
 
 > 本项目在 Android 16 / ColorOS V16 (PLK110) 上开发，SELinux Enforcing，KernelSU root。
+>
+> 仓库名 `steer-android`，但 **KernelSU 模块 id 固定为 `steer`**（二者不同无妨；
+> 改 id 会让已安装用户变成"另一个模块"，升级/卸载都会错乱）。
 
 ---
 
